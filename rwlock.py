@@ -68,9 +68,10 @@ class _LightSwitch:
 
     def release(self, lock):
         self.__mutex.acquire()
-        self.__counter -= 1
-        if self.__counter == 0:
-            lock.release()
+        if self.__counter >= 1:
+            self.__counter -= 1
+            if self.__counter == 0:
+                lock.release()
         self.__mutex.release()
 
 ##
